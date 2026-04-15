@@ -320,18 +320,29 @@
   </div>
 
   <button id="music-btn" title="Play music">🎵</button>
-  <div class="tap-hint">tap anywhere to spread the love ✨</div>
+  <div class="tap-hint"> Here is a little surprise for you ml ✨</div>
 
   <script>
     /* ── Music ── */
-    let audioCtx = null;
-    let playing = false;
+    /* ── Music ── */
     const btn = document.getElementById('music-btn');
+    const audio = new Audio('music.mp3');
+    audio.loop = true;
+    audio.volume = 0.5;
+    let playing = false;
 
-    function initAudio() {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-
+    btn.addEventListener('click', () => {
+      if (!playing) {
+        audio.play();
+        btn.textContent = '🎶';
+        btn.classList.add('playing');
+      } else {
+        audio.pause();
+        btn.textContent = '🎵';
+        btn.classList.remove('playing');
+      }
+      playing = !playing;
+    });
     /* Soft waltz melody notes */
     const melody = [
       { n: 64, d: 0.6 }, { n: 67, d: 0.3 }, { n: 71, d: 0.3 },
@@ -429,8 +440,7 @@
       '<span style="font-family:\'Playfair Display\',serif;font-style:italic;color:#be5fed;font-size:13px;white-space:nowrap;">sralanh oun nas na</span>',
       '💙', '💙', '💙', '🩵', '🤍', '💜',
       '🌸', '🌷', '🌺',
-
-      '💎', '🦋',];
+      '🦋',];
 
     function spawn(x, y, count) {
       for (let i = 0; i < count; i++) {
