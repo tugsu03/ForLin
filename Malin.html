@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>For Malin 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --sky: #b8e4f9;
+    --petal: #d4b8f9;
+    --blush: #f9c8e0;
+    --mint: #b8f0e4;
+    --butter: #f9efb8;
+    --lavender: #c8b8f9;
+    --white: #ffffff;
+    --deep: #3a5a7a;
+  }
+
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    touch-action: manipulation;
+  }
+
+  body {
+    background: linear-gradient(135deg, #c8e8fb 0%, #d8c8fb 30%, #f4c8e8 60%, #c8f0e8 100%);
+    font-family: 'Lato', sans-serif;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='18' font-size='18'%3E💙%3C/text%3E%3C/svg%3E"), auto;
+    user-select: none;
+  }
+
+  #scene {
+    position: fixed; inset: 0;
+    overflow: hidden;
+  }
+
+  /* Soft animated background blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.45;
+    animation: blobFloat ease-in-out infinite;
+  }
+  .blob1 { width: 420px; height: 420px; background: #aed6f1; top: -80px; left: -80px; animation-duration: 12s; }
+  .blob2 { width: 320px; height: 320px; background: #d2b4de; bottom: -60px; right: -60px; animation-duration: 9s; animation-delay: -3s; }
+  .blob3 { width: 260px; height: 260px; background: #f9cee7; top: 40%; left: 60%; animation-duration: 14s; animation-delay: -6s; }
+  .blob4 { width: 200px; height: 200px; background: #a9dfbf; bottom: 20%; left: 5%; animation-duration: 11s; animation-delay: -4s; }
+  @keyframes blobFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px,-20px) scale(1.05); }
+    66% { transform: translate(-20px,15px) scale(0.97); }
+  }
+
+  /* Shimmer stars */
+  .star {
+    position: absolute;
+    pointer-events: none;
+    font-size: 14px;
+    animation: starTwinkle ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes starTwinkle {
+    0%,100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+  }
+
+  /* Center message */
+  .center-wrap {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 20;
+    animation: revealIn 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @keyframes revealIn {
+    0% { opacity: 0; transform: translate(-50%, -44%) scale(0.8); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  .name-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 14vw, 96px);
+    font-weight: 600;
+    color: #3a5a7a;
+    letter-spacing: 4px;
+    line-height: 1;
+    text-shadow: 0 2px 30px rgba(100,160,220,0.4), 0 0 60px rgba(180,140,220,0.3);
+    animation: namePulse 3s ease-in-out infinite;
+  }
+  @keyframes namePulse {
+    0%,100% { text-shadow: 0 2px 30px rgba(100,160,220,0.4), 0 0 60px rgba(180,140,220,0.3); }
+    50% { text-shadow: 0 2px 40px rgba(100,160,220,0.7), 0 0 80px rgba(180,140,220,0.55); }
+  }
+
+  .hearts-row {
+    font-size: clamp(22px, 6vw, 36px);
+    margin: 10px 0 14px;
+    animation: bobble 2.2s ease-in-out infinite;
+    letter-spacing: 6px;
+  }
+  @keyframes bobble {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .message-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(15px, 4vw, 22px);
+    color: #5a3a6a;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    text-shadow: 0 1px 8px rgba(180,140,220,0.3);
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .tap-hint {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(80,100,140,0.7);
+    font-size: 13px;
+    font-style: italic;
+    letter-spacing: 1px;
+    z-index: 30;
+    animation: hintFade 3s ease-in-out infinite;
+  }
+  @keyframes hintFade {
+    0%,100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Music button */
+  #music-btn {
+    position: fixed;
+    top: 20px; right: 20px;
+    z-index: 50;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(100,160,220,0.5);
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 2px 16px rgba(100,160,220,0.2);
+  }
+  #music-btn:hover { transform: scale(1.1); background: rgba(255,255,255,0.85); }
+  #music-btn.playing { animation: spin 4s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Floating particles */
+  .particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 25;
+    animation: floatUp linear forwards;
+    font-size: 20px;
+  }
+  @keyframes floatUp {
+    0%   { opacity: 1; transform: translateY(0) translateX(0) rotate(0deg) scale(1); }
+    85%  { opacity: 0.9; }
+    100% { opacity: 0; transform: translateY(-100vh) translateX(var(--drift)) rotate(var(--spin)) scale(0.2); }
+  }
+</style>
+</head>
+<body>
+
+<div id="scene">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+</div>
+
+<div class="center-wrap">
+  <div class="hearts-row">🌸 💙 🌸</div>
+  <div class="name-text">i love you a lot Lin</div>
+  <div class="hearts-row">💙 🌷 💙</div>
+  <div class="message-text">Every day with you is the most beautiful gift I could ever ask for</div>
+</div>
+
+<button id="music-btn" title="Play music">🎵</button>
+<div class="tap-hint">tap anywhere to spread the love ✨</div>
+
+<script>
+/* ── Music ── */
+let audioCtx = null;
+let playing = false;
+const btn = document.getElementById('music-btn');
+
+function initAudio() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+
+/* Soft waltz melody notes */
+const melody = [
+  {n:64,d:0.6},{n:67,d:0.3},{n:71,d:0.3},
+  {n:72,d:0.6},{n:71,d:0.3},{n:69,d:0.3},
+  {n:67,d:0.6},{n:64,d:0.3},{n:62,d:0.3},
+  {n:60,d:0.6},{n:62,d:0.3},{n:64,d:0.3},
+  {n:64,d:0.6},{n:64,d:0.3},{n:64,d:0.3},
+  {n:62,d:0.6},{n:62,d:0.3},{n:62,d:0.3},
+  {n:67,d:0.6},{n:69,d:0.3},{n:67,d:0.3},
+  {n:64,d:1.2},{n:0,d:0.3},
+
+  {n:69,d:0.6},{n:72,d:0.3},{n:76,d:0.3},
+  {n:77,d:0.6},{n:76,d:0.3},{n:74,d:0.3},
+  {n:72,d:0.6},{n:69,d:0.3},{n:67,d:0.3},
+  {n:65,d:0.6},{n:67,d:0.3},{n:69,d:0.3},
+  {n:71,d:0.6},{n:72,d:0.3},{n:71,d:0.3},
+  {n:69,d:0.6},{n:67,d:0.3},{n:65,d:0.3},
+  {n:64,d:0.9},{n:62,d:0.3},{n:60,d:0.3},
+  {n:60,d:1.5},{n:0,d:0.3},
+];
+
+const chords = [
+  [48,52,55],[48,52,55],[43,47,50],[43,47,50],
+  [45,48,52],[45,48,52],[47,50,53],[47,50,53],
+  [48,52,55],[48,52,55],[43,47,50],[43,47,50],
+  [45,48,52],[45,48,52],[43,47,50],[43,47,50],
+];
+
+function noteHz(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
+
+function playNote(freq, start, dur, vol, type='sine') {
+  if (!freq) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, start);
+  gain.gain.setValueAtTime(0, start);
+  gain.gain.linearRampToValueAtTime(vol, start + 0.04);
+  gain.gain.setValueAtTime(vol, start + dur * 0.7);
+  gain.gain.linearRampToValueAtTime(0, start + dur);
+  osc.start(start);
+  osc.stop(start + dur + 0.05);
+}
+
+let loopTimeout = null;
+
+function playLoop() {
+  if (!playing) return;
+  let t = audioCtx.currentTime + 0.05;
+  const tempo = 0.48;
+
+  melody.forEach(({n, d}) => {
+    if (n) playNote(noteHz(n), t, d * tempo * 0.9, 0.13, 'triangle');
+    t += d * tempo;
+  });
+
+  let ct = audioCtx.currentTime + 0.05;
+  chords.forEach(chord => {
+    chord.forEach(note => playNote(noteHz(note), ct, tempo * 1.4, 0.025, 'sine'));
+    ct += tempo * 1.5;
+  });
+
+  const totalDur = melody.reduce((s,{d}) => s + d, 0) * tempo * 1000;
+  loopTimeout = setTimeout(playLoop, totalDur - 100);
+}
+
+btn.addEventListener('click', () => {
+  if (!audioCtx) initAudio();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  playing = !playing;
+  btn.textContent = playing ? '🎶' : '🎵';
+  if (playing) { btn.classList.add('playing'); playLoop(); }
+  else { btn.classList.remove('playing'); clearTimeout(loopTimeout); }
+});
+
+/* ── Stars ── */
+const scene = document.getElementById('scene');
+const starSyms = ['✨','⭐','💫','🌟','⋆','✦','✧'];
+for (let i = 0; i < 22; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.textContent = starSyms[Math.floor(Math.random() * starSyms.length)];
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.fontSize = (Math.random() * 10 + 8) + 'px';
+  s.style.animationDelay = (Math.random() * 4) + 's';
+  s.style.animationDuration = (Math.random() * 2.5 + 1.5) + 's';
+  scene.appendChild(s);
+}
+
+/* ── Particles ── */
+const symbols = [
+  'Hairtai shuu',
+  'sralanh oun nas na',
+  '💙','💙','💙','🩵','🤍','💜',
+  '🌸','🌷','🌺','🌼','🏵️',
+  '✨','💫','⭐','🌟',
+  '💎','🦋','🫧'
+];
+
+function spawn(x, y, count) {
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    const size = Math.random() * 20 + 14;
+    p.style.fontSize = size + 'px';
+    p.style.left = (x + (Math.random() - 0.5) * 60) + 'px';
+    p.style.top = y + 'px';
+    p.style.setProperty('--drift', ((Math.random() - 0.5) * 180) + 'px');
+    p.style.setProperty('--spin', ((Math.random() - 0.5) * 720) + 'deg');
+    const dur = Math.random() * 2.5 + 2;
+    p.style.animationDuration = dur + 's';
+    p.style.animationDelay = (Math.random() * 0.25) + 's';
+    document.body.appendChild(p);
+    p.addEventListener('animationend', () => p.remove());
+  }
+}
+
+document.addEventListener('click', e => {
+  if (e.target === btn) return;
+  spawn(e.clientX, e.clientY, 5);
+});
+document.addEventListener('touchstart', e => {
+  for (const t of e.touches) spawn(t.clientX, t.clientY, 4);
+}, { passive: true });
+
+/* Auto burst on load */
+function autoBurst() {
+  const cols = 7;
+  for (let i = 0; i < cols; i++) {
+    setTimeout(() => {
+      spawn(
+        (window.innerWidth / cols) * i + window.innerWidth / cols / 2,
+        window.innerHeight,
+        3
+      );
+    }, i * 100);
+  }
+}
+autoBurst();
+setInterval(autoBurst, 3500);
+</script>
+</body>
+</html>
